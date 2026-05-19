@@ -1,0 +1,27 @@
+//bruteforce | Time Complexity: O(nlogn), Space Complexity: O(1) (ignoring sorting stack space).
+class Solution {
+public:
+    int missingNumber(vector<int>& nums) {
+        int n = nums.size();
+        sort(nums.begin(),nums.end());
+        for(int i = 0; i < n; i++)
+        {
+            if(nums[i] != i)
+            {
+                return i;
+            }
+        }
+        return n;
+    }
+};
+
+//optimal | Time Complexity: O(n), Space Complexity: O(1).
+class Solution {
+public:
+    int missingNumber(vector<int>& nums) {
+        int n = nums.size();
+        int totalsum = n * (n+1)/2;
+        int sum = accumulate(nums.begin(),nums.end(),0);
+        return totalsum - sum;
+    }
+};
