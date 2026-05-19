@@ -1,0 +1,49 @@
+//bruteforce : good for smaller input
+Time Complexity: O(n2), Space Complexity: O(1).
+
+class Solution {
+public:
+    bool check(vector<int>& nums) {
+        int n = nums.size();
+        for(int i = 0; i < n; i++)
+        {
+            if(is_sorted(nums.begin(),nums.end()))
+            {
+                return true;
+            }
+            else
+            {
+                int temp = nums[0];
+                for(int i = 1; i < n; i++)
+                {
+                    nums[i-1] = nums[i];
+                }
+                nums[n-1] = temp;
+            }
+        }
+        return false;
+    }
+};
+
+
+//optimal | checking pair apporach
+class Solution {
+public:
+    bool check(vector<int>& nums) {
+        int n = nums.size();
+        int cnt = 0;
+        if(nums[n-1] > nums[0])
+        {
+            cnt++;
+        }
+
+        for(int i = 1; i < n; i++)
+        {
+            if(nums[i-1] > nums[i])
+            {
+                cnt++;
+            }
+        }
+        return cnt <= 1 ? true : false;
+    }
+};
