@@ -1,0 +1,65 @@
+
+
+//bruteforce | TC: O(n! × n), SC: O(n! × n)
+class Solution {
+public:
+
+    void generate(set<vector<int>>& st, vector<int>& nums, int idx)
+    {
+        // base case
+        if(idx == nums.size())
+        {
+            st.insert(nums);
+            return;
+        }
+
+        for(int i = idx; i < nums.size(); i++)
+        {
+            swap(nums[i], nums[idx]);
+
+            generate(st, nums, idx + 1);
+
+            // backtrack
+            swap(nums[i], nums[idx]);
+        }
+    }
+
+    void nextPermutation(vector<int>& nums) {
+
+        vector<int> original = nums;
+
+        set<vector<int>> st;
+
+        generate(st, nums, 0);
+
+        // convert set to vector
+        vector<vector<int>> list(st.begin(), st.end());
+
+        for(int i = 0; i < list.size(); i++)
+        {
+            if(list[i] == original)
+            {
+                if(i < list.size() - 1)
+                {
+                    nums = list[i + 1];
+                }
+                else
+                {
+                    nums = list[0];
+                }
+
+                break;
+            }
+        }
+    }
+};
+
+
+//inbuilt | using stl | TC: O(n), SC: O(1)
+
+class Solution {
+public:
+    void nextPermutation(vector<int>& nums) {
+        next_permutation(nums.begin(),nums.end());
+    }
+};
