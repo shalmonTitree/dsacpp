@@ -1,0 +1,25 @@
+while(tail < n)
+{
+    // Step 1: expand window
+    while(head + 1 < n && condition)
+    {
+        head++;
+
+        // include arr[head]
+    }
+
+    // Step 2: update answer
+    ans = max(ans, head - tail + 1);
+
+    // Step 3: shrink window
+    if(tail <= head)
+    {
+        // remove arr[tail]
+        tail++;
+    }
+    else
+    {
+        tail++;
+        head = tail - 1;
+    }
+}
