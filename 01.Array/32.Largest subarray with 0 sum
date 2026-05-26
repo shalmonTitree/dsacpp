@@ -1,0 +1,60 @@
+//Bruteforce | TC: O(n^2), SC: O(1)
+
+class Solution {
+  public:
+    int maxLength(vector<int>& arr) {
+        int n = arr.size();
+        
+        int ans = 0;
+        
+        for(int i = 0; i < n; i++)
+        {
+            int sum = 0;
+            for(int j = i; j < n; j++)
+            {
+                sum += arr[j];
+                if(sum == 0)
+                {
+                    ans = max(ans,j - i + 1);
+                }
+            }
+        }
+        return ans;
+        
+    }
+};
+
+//optimal | TC: O(n), SC: O(n)
+class Solution {
+  public:
+    int maxLength(vector<int>& arr) {
+        int n = arr.size();
+        
+        int ans = 0;
+        unordered_map<int,int> mp;
+        int sum = 0;
+        for(int i = 0; i < n; i++)
+        {
+            sum += arr[i];
+            if(sum == 0)
+            {
+                ans = i + 1;
+            }
+            if(mp.find(sum) != mp.end())
+            {
+               ans = max(ans,i - mp[sum]);
+            }
+            else{
+                mp[sum] = i;
+            }
+            
+            
+        }
+        return ans;
+        
+    }
+};
+
+
+
+
