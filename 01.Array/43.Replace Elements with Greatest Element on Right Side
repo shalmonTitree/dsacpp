@@ -1,0 +1,38 @@
+//Bruteforce
+class Solution {
+public:
+    vector<int> replaceElements(vector<int>& arr) {
+        int n = arr.size();
+        vector<int>ans;
+        for(int i = 0; i < n; i++)
+        {
+            int val = INT_MIN;
+            for(int j = i + 1; j < n; j++)
+            {
+                val = max(val,arr[j]);
+            }
+            ans.push_back(val);
+        }
+        ans.pop_back();
+        ans.push_back(-1);
+        return ans;
+    }
+};
+
+//optimal
+class Solution {
+public:
+    vector<int> replaceElements(vector<int>& arr) {
+        int n = arr.size();
+        vector<int>ans(n);
+        ans[n-1] = -1;
+        int maxi = arr[n-1];
+        for(int i = n - 2; i >= 0; i--)
+        {
+            ans[i] = maxi;
+            maxi = max(maxi,arr[i]);
+            
+        }
+        return ans;
+    }
+};
