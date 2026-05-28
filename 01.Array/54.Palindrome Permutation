@@ -1,0 +1,42 @@
+#include <iostream>
+#include <bits/stdc++.h>
+using namespace std;
+
+bool solution(string s) {
+    int n = s.size();
+    unordered_map<char,int>mp;
+
+    int evenchar = 0;
+    int oddchar = 0;
+
+    for(auto it : s)
+    {
+		mp[it]++;
+    }
+
+    for(auto it : mp)
+    {
+        if(it.second % 2 == 0)
+        {
+            evenchar++;
+        }
+        else
+        {
+            oddchar++;
+        }
+    }
+
+    if(oddchar > 1)
+    {
+        return false;
+    }
+    return true;
+}
+
+int main() {
+    string s;
+    getline(cin, s);
+    bool result = solution(s);
+    cout << (result ? "true" : "false") << endl;
+    return 0;
+}
