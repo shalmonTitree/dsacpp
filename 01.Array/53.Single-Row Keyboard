@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int calculateTime(string keyboard, string word) {
+    
+        int charPosition[26];
+        for (int index = 0; index < 26; ++index) {
+            charPosition[keyboard[index] - 'a'] = index;
+        }
+     
+        int totalTime = 0;
+        int currentPosition = 0;  // Finger starts at position 0
+       
+        for (char& character : word) {
+       
+            int targetPosition = charPosition[character - 'a'];
+            totalTime += abs(currentPosition - targetPosition);
+            currentPosition = targetPosition;
+        }
+
+        return totalTime;
+    }
+};
