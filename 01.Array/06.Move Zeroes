@@ -1,0 +1,65 @@
+//brutefroce
+TC: O(n)
+SC: O(n)
+
+class Solution {
+public:
+    void moveZeroes(vector<int>& nums) {
+        vector<int> temp;
+
+        // Store non-zero elements
+        for (int x : nums) {
+            if (x != 0)
+                temp.push_back(x);
+        }
+
+        // Add zeros
+        while (temp.size() < nums.size())
+            temp.push_back(0);
+
+        // Copy back
+        nums = temp;
+    }
+};
+
+//better
+TC: O(n)
+SC: O(1)
+
+class Solution {
+public:
+    void moveZeroes(vector<int>& nums) {
+        int index = 0;
+
+        // Put all non-zero elements first
+        for (int x : nums) {
+            if (x != 0) {
+                nums[index] = x;
+                index++;
+            }
+        }
+
+        // Fill remaining positions with 0
+        while (index < nums.size()) {
+            nums[index] = 0;
+            index++;
+        }
+    }
+};
+
+
+//optimal
+class Solution {
+public:
+    void moveZeroes(vector<int>& nums) {
+        int left = 0;
+
+        for (int right = 0; right < nums.size(); right++) {
+            if (nums[right] != 0) {
+                swap(nums[left], nums[right]);
+                left++;
+            }
+        }
+    }
+};
+
